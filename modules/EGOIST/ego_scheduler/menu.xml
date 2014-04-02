@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OX>
+    <OXMENU id="NAVIGATION_ESHOPADMIN">
+        <MAINMENU id="Scheduler">
+            <SUBMENU id="ego_schedulerlog" cl="ego_schedulerlog_main"></SUBMENU>
+            <SUBMENU id="ego_scheduler" cl="ego_scheduler"></SUBMENU>
+        </MAINMENU>
+    </OXMENU>
+</OX>
