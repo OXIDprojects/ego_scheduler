@@ -21,7 +21,7 @@ class sendServiceMail extends oxAdminView
         $oMail->setSmtp($oShop);
 
         $oMail->setFrom($oShop->oxshops__oxinfoemail->value);
-        $oMail->setRecipient('steve_schuetze@egoist.de');
+        $oMail->setRecipient('technik@egoist.de');
 
         $oMail->setSubject('Scheduler E-Mail-Notification');
 
