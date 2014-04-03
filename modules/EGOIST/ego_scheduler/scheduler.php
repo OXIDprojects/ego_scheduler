@@ -1,18 +1,26 @@
 <?php
 
-ini_set('error_reporting', E_ERROR);
-ini_set('log_errors', false);
-ini_set('display_errors', true);
+if (php_sapi_name() == 'cli') {
+    ini_set('error_reporting', E_ERROR);
+    ini_set('log_errors', false);
+    ini_set('display_errors', true);
 
-/**
- * Bootstrapping
- * Start the framework
- */
-try {
-    require_once __DIR__ . '/../../../bootstrap.php';
-    require_once __DIR__ . '/lib/Cron/CronExpression.php';
-} catch (Exception $e) {
-    echo 'Caught exception: ' . $e->getMessage() . PHP_EOL;
+    /**
+     * Bootstrapping
+     * Start the framework
+     */
+    try {
+        require_once __DIR__ . '/../../../bootstrap.php';
+        require_once __DIR__ . '/lib/Cron/CronExpression.php';
+    } catch (Exception $e) {
+        echo 'Caught exception: ' . $e->getMessage() . PHP_EOL;
+    }
+
+    /**
+     * Start the scheduler
+     */
+    $scheduler = Scheduler::getInstance();
+    $scheduler->run();
 }
 
 /**
