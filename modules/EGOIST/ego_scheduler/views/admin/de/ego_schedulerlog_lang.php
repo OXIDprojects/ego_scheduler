@@ -6,6 +6,7 @@ $aLang = array(
     'charset'                        => 'UTF-8',
     'error'                          => 'Fehlermeldungen',
     'ego_schedulerlog'               => 'Scheduler Log',
+    'Scheduler'                      => 'EGOIST Scheduler',
     'ego_schedulerlog_HEADLINE'      => 'Die folgenden Logeinträge sind im Scheduler-Log aufgeführt.<br /><div class="infoNotice">Sie finden die Datei unter /log/ego_scheduler.log</div>',
     'ego_schedulerlog_MSG'           => 'Fehlermeldung',
     'ego_schedulerlog_HINT'          => 'Hinweis',
