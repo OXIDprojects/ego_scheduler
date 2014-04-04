@@ -168,16 +168,16 @@ class ego_scheduler extends oxAdminView
 
     private function _getLastLog($id)
     {
-        $oDb = oxDb::getDb();
+        $oDb = oxDb::getDb(false);
         $sQuery = 'SELECT * FROM ego_scheduler_log WHERE taskid =' . $id . ' ORDER BY id DESC LIMIT 1';
         $oRes = $oDb->Execute($sQuery);
         if ($oRes != false && $oRes->recordCount() > 0) {
             while (!$oRes->EOF) {
                 $log = array();
-                $log['status'] = $oRes->fields[3];
-                $log['message'] = $oRes->fields[4];
-                $log['time'] = date('Y-m-d H:i:s', $oRes->fields[6]);
-                $log['runtime'] = $oRes->fields[7];
+                $log['status'] = $oRes->fields['status'];
+                $log['message'] = $oRes->fields['message'];
+                $log['time'] = date('Y-m-d H:i:s', $oRes->fields['time']);
+                $log['runtime'] = $oRes->fields['runtime'];
                 break;
             }
             return $log;
