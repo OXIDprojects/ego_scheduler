@@ -76,6 +76,7 @@ final class Scheduler
 
     public function run()
     {
+        $ret = null;
         //check if scheduler is still running
         $config = oxRegistry::getConfig()->getShopConfVar(self::CONFIG_ENTRY_NAME);
         if ($config['locked']) {
@@ -144,9 +145,11 @@ final class Scheduler
             $this->_sendMail(array_diff_assoc($deactivatedCountBefore, $deactivatedCountAfter));
         }
 
-        //unlock scheduler
-        $config['locked'] = 0;
-        oxRegistry::getConfig()->saveShopConfVar('aarr', self::CONFIG_ENTRY_NAME, $config);
+        //unlock scheduler there was a success
+        if ($ret != null && array_key_exists('success', $ret) && $ret['success']) {
+            $config['locked'] = 0;
+            oxRegistry::getConfig()->saveShopConfVar('aarr', self::CONFIG_ENTRY_NAME, $config);
+        }
 
     }
 
