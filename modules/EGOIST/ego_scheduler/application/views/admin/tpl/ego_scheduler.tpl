@@ -152,7 +152,7 @@ function _groupExp(el) {
                         </tr>
                         <tr>
                             <td>
-                                [{ oxmultilang ident="EGO_SCHEDULER_PATH" }]
+                                [{ oxmultilang ident="EGO_SCHEDULER_PATH" }] [{ oxmultilang ident="EGO_SCHEDULER_PATH_EXAMPLE" }]
                             </td>
                             <td>
                                 <input type="text" name="editval[new][path]" value=""> <br />
@@ -160,7 +160,7 @@ function _groupExp(el) {
                         </tr>
                         <tr>
                             <td>
-                                [{ oxmultilang ident="EGO_SCHEDULER_TIMEINTERVAL" }]
+                                [{ oxmultilang ident="EGO_SCHEDULER_TIMEINTERVAL" }] [{ oxmultilang ident="EGO_SCHEDULER_TIMEINTERVAL_EXAMPLE" }]
                             </td>
                             <td>
                                 <input type="text" name="editval[new][timeinterval]" value=""> <br />
