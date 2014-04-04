@@ -24,12 +24,6 @@ if (php_sapi_name() == 'cli') {
 }
 
 /**
- * Start the scheduler
- */
-$scheduler = Scheduler::getInstance();
-$scheduler->run();
-
-/**
  * Description of scheduler
  */
 final class Scheduler
@@ -76,7 +70,6 @@ final class Scheduler
 
     public function run()
     {
-        $ret = null;
         //check if scheduler is still running
         $config = oxRegistry::getConfig()->getShopConfVar(self::CONFIG_ENTRY_NAME);
         if ($config['locked']) {
@@ -100,6 +93,7 @@ final class Scheduler
         $tasks = $this->_getTasks();
         $deactivatedCountBefore = $this->_getActiveTasks();
         foreach ($tasks as $task) {
+            $ret = null;
             /**
              * Starting output for logfiles
              */
@@ -138,6 +132,12 @@ final class Scheduler
              * Starting output for logfiles
              */
             echo PHP_EOL . "###END###: " . date('Y-m-d H:i:s') . PHP_EOL;
+
+            //check for correct execution
+            if ($ret == null || array_key_exists('success', $ret) && !$ret['success']) {
+                $this->_deactivateTask($task['id']);
+                $this->_sendMail(array($task));
+            }
         }
         $deactivatedCountAfter = $this->_getActiveTasks();
 
@@ -145,12 +145,9 @@ final class Scheduler
             $this->_sendMail(array_diff_assoc($deactivatedCountBefore, $deactivatedCountAfter));
         }
 
-        //unlock scheduler there was a success
-        if ($ret != null && array_key_exists('success', $ret) && $ret['success']) {
-            $config['locked'] = 0;
-            oxRegistry::getConfig()->saveShopConfVar('aarr', self::CONFIG_ENTRY_NAME, $config);
-        }
-
+        //unlock scheduler
+        $config['locked'] = 0;
+        oxRegistry::getConfig()->saveShopConfVar('aarr', self::CONFIG_ENTRY_NAME, $config);
     }
 
     private function _getTasks()
