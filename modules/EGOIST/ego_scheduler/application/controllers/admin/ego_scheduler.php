@@ -18,20 +18,20 @@ class ego_scheduler extends oxAdminView
     {
         $sQuery = 'SELECT * FROM ego_scheduler_tasks';
 
-        $oDb = oxDb::getDb();
+        $oDb = oxDb::getDb(false);
         $oRes = $oDb->Execute($sQuery);
         $tasks = array();
 
         if ($oRes != false && $oRes->recordCount() > 0) {
             while (!$oRes->EOF) {
                 $task = array();
-                $task['id'] = $oRes->fields[0];
-                $task['active'] = $oRes->fields[1];
-                $task['path'] = $oRes->fields[2];
-                $task['class'] = $oRes->fields[3];
-                $task['description'] = $oRes->fields[4];
-                $task['timeinterval'] = $oRes->fields[5];
-                $task['lastrun'] = $oRes->fields[6];
+                $task['id'] = $oRes->fields['id'];
+                $task['active'] = $oRes->fields['active'];
+                $task['path'] = $oRes->fields['path'];
+                $task['class'] = $oRes->fields['class'];
+                $task['description'] = $oRes->fields['description'];
+                $task['timeinterval'] = $oRes->fields['timeinterval'];
+                $task['lastrun'] = $oRes->fields['lastrun'];
                 $task['log'] = $this->_getLastLog($task['id']);
                 $tasks[] = $task;
                 $oRes->moveNext();
@@ -56,13 +56,13 @@ class ego_scheduler extends oxAdminView
         $task = array();
 
         if ($oRes != false && $oRes->recordCount() > 0) {
-            $task['id'] = $oRes->fields[0];
-            $task['active'] = $oRes->fields[1];
-            $task['path'] = $oRes->fields[2];
-            $task['class'] = $oRes->fields[3];
-            $task['description'] = $oRes->fields[4];
-            $task['timeinterval'] = $oRes->fields[5];
-            $task['lastrun'] = $oRes->fields[6];
+            $task['id'] = $oRes->fields['id'];
+            $task['active'] = $oRes->fields['active'];
+            $task['path'] = $oRes->fields['path'];
+            $task['class'] = $oRes->fields['class'];
+            $task['description'] = $oRes->fields['description'];
+            $task['timeinterval'] = $oRes->fields['timeinterval'];
+            $task['lastrun'] = $oRes->fields['lastrun'];
             $task['log'] = $this->_getLastLog($task['id']);
         }
         return $task;
